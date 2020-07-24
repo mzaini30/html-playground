@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>HTML Playground</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="vendor/bootstrap.min.css">
+  <style>
+   * {
+    word-wrap: break-word;
+   }
+   img {
+    max-width: 100%;
+   }
+   .hasil {
+    background: aqua;
+    overflow: auto;
+   }
+  </style>
+ </head>
+ <body>
+  <div class="vue">
+   <div class="container">
+    <br>
+    <div class="form-group">
+     <div class="hasil tinggi">
+      <div v-html="html"></div>
+     </div>
+    </div>
+    <div class="form-group">
+     <textarea v-model="html" class="form-control tinggi" placeholder="Coding di sini"></textarea>
+    </div>
+   </div>
+  </div>
+  <script src="vendor/vue.min.js"></script>
+  <script>
+   tinggi = () => document.querySelectorAll(".tinggi").forEach(x => {
+    x.style.height = `${(window.innerHeight - 60) / 2}px`
+   })
+   tinggi()
+   window.addEventListener("resize", tinggi)
+   new Vue({
+    el: ".vue",
+    data: {
+     html: ""
+    },
+    mounted(){
+     if (localStorage.olah_html){
+      this.html = localStorage.olah_html
+     }
+    },
+    watch: {
+     html(){
+      localStorage.setItem("olah_html", this.html)
+     }
+    }
+   })
+  </script>
+ </body>
+</html>
